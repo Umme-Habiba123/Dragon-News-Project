@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+import SocialLogin from '../SocialLogin';
+import FingUsOn from '../FingUsOn';
+import QZone from '../QZone';
+import BgImg from '../BgImg';
 
 const RightAside = () => {
     return (
         <div>
-            <h1 className=''>RightAside</h1>
+            <Suspense fallback={<span className="loading loading-ring loading-xl"></span>}>
+            <SocialLogin></SocialLogin>
+            <FingUsOn></FingUsOn>
+            <QZone></QZone>
+            <BgImg></BgImg>
+            </Suspense>
         </div>
     );
 };

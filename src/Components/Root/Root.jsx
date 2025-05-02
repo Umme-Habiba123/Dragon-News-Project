@@ -16,7 +16,7 @@ const Root = () => {
             <Latest></Latest>
             <Navbar></Navbar>
           </section>
-            <main className='grid grid-cols-12 my-3   font-bold mt-20'>
+            <main className='grid grid-cols-12 my-3 gap-10  font-bold mt-20'>
 
                 <aside className='col-span-3 '>
                   <LeftAside></LeftAside>

@@ -5,48 +5,61 @@ import Root from './Components/Root/Root'
 import About from './Pages/About'
 import Career from './Pages/Career'
 import Home from './Pages/Home'
-
+import CategoryNews from './Pages/CategoryNews'
 
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router";
-import Category from './Pages/Category'
+
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element:<Root></Root>,
-    errorElement:<h1 className='text-center text-7xl mt-80'>404 page not found</h1>,
-    children:[
+    element: <Root></Root>,
+    errorElement: <h1 className='text-center text-7xl mt-80'>404 page not found</h1>,
+    children: [
       {
-        
-        index:true,
-        Component:Home
+
+        index: true,
+        Component: Home
       },
       {
-        path:'About',
-        Component:About
+        path: 'About',
+        Component: About
       },
       {
-        path:'Career',
-        Component:Career
+        path: 'Career',
+        Component: Career
       },
       {
-        path:'Category:id',
-        Component:Category
+        path: 'CategoryNews/:id',
+        Component: CategoryNews,
+        loader: () => fetch('/news.json')
       }
     ]
+  },
+  {
+    path:'/auth',
+    element:<h2>Authentication Layout</h2>
+  },
+  {
+    path:'/news',
+    element:<h2>News Layout</h2>
+  },
+  {
+    path:'/*',
+    element:<h2>Error 404</h2>
   }
- 
 
- 
+
+
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </StrictMode>,
 )
