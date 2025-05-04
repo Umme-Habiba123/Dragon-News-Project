@@ -9,9 +9,16 @@ import CategoryNews from './Pages/CategoryNews'
 
 
 import {
+
   createBrowserRouter,
   RouterProvider,
 } from "react-router";
+import Login from './Pages/Login'
+import Register from './Pages/Register'
+import AuthLayout from './Components/Homelayout/AuthLayout'
+import AuthProvider, { AuthContext } from './Provider/AuthProvider'
+import NewsDetails from './Pages/NewsDetails'
+import PrivateRoute from './Provider/PrivateRoute'
 
 
 
@@ -42,16 +49,31 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path:'/auth',
-    element:<h2>Authentication Layout</h2>
+    path: '/authlayout',
+    Component: AuthLayout,
+    children: [
+      {
+        path: '/authlayout/login',
+        Component: Login
+      },
+      {
+        path: '/authlayout/register',
+        Component: Register
+      }
+    ]
   },
   {
-    path:'/news',
-    element:<h2>News Layout</h2>
+    path: '/news-details/:id',
+
+    element: <PrivateRoute>
+      <NewsDetails></NewsDetails>
+    </PrivateRoute>,
+
+    loader: () => fetch('/news.json')
   },
   {
-    path:'/*',
-    element:<h2>Error 404</h2>
+    path: '/*',
+    element: <h2>Error 404</h2>
   }
 
 
@@ -60,6 +82,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+ 
   </StrictMode>,
 )

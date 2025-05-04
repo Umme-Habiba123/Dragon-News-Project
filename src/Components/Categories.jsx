@@ -12,6 +12,7 @@ const Categories = () => {
 
     return (
         <div>
+            
             <h2 className='text-2xl mb-8'>All Caterories {categories.length}</h2>
 
             <div className='grid grid-cols-1 mt-5 space-y-5 text-accent '>
